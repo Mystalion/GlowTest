@@ -1,3 +1,5 @@
 name: GlowTest
-main: com.mystalion.glowtest.GlowTest
+main: com.mystalion.glowtest.GlowTestPlugin
 version: 1
+commands:
+  glowtest:
