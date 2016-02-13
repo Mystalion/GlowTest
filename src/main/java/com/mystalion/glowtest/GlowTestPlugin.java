@@ -17,13 +17,18 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class GlowTestPlugin extends JavaPlugin implements Listener {
 
 	private Inventory inventroy;
+	private Inventory inventroy2;
 
 	@Override
 	public void onEnable() {
 		ItemStack item = new ItemStack(Material.STAINED_GLASS_PANE);
+		ItemStack item2 = new ItemStack(Material.GLOWSTONE);
 		inventroy = Bukkit.createInventory(null, 6 * 9, "Testing Inventory Sync");
+		inventroy2 = Bukkit.createInventory(null, 6 * 9, "Testing Inventory Sync 2");
+		
 		for (int i = 0; i < 9; i++) {
 			inventroy.setItem(i, item);
+			inventroy2.setItem(i * 5, item2);
 		}
 		Bukkit.getPluginManager().registerEvents(this, this);
 		getCommand("glowtest").setExecutor(new CommandExecutor() {
@@ -42,6 +47,7 @@ public class GlowTestPlugin extends JavaPlugin implements Listener {
 		if (event.getInventory().equals(inventroy)) {
 			event.setCancelled(true);
 			event.setResult(Result.DENY);
+			event.getWhoClicked().openInventory(inventroy2);
 		}
 	}
 }
